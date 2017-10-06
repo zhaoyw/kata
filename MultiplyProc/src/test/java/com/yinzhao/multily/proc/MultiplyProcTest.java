@@ -24,5 +24,14 @@ public class MultiplyProcTest {
         assertEquals("7", multiplier.multiply("1", "7"));
     }
 
+    @Test
+    public void test_3_multiply_5_equal_15() {
+        assertEquals("15", multiplier.multiply("3", "5"));
+    }
+
+    @Test
+    public void test_123_multiply_3_equal_369() {
+        assertEquals("369", multiplier.multiply("123", "3"));
+    }
 
 }
