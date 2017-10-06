@@ -34,4 +34,11 @@ public class MultiplyProcTest {
         assertEquals("369", multiplier.multiply("123", "3"));
     }
 
+    @Test
+    public void test_123_multiply_5_equal_615() {
+        assertEquals("615", multiplier.multiply("123", "5"));
+    }
+
+
+
 }
