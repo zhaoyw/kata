@@ -4,14 +4,13 @@ import java.util.Arrays;
 
 public class MultiplyProc {
     public String multiply(String m1, String m2) {
-        char[] retArray = new char[m1.length() * m2.length() + 1];
+        char[] retArray = new char[m1.length() * m2.length()];
 
         char[] array1 = m1.toCharArray();
         char[] array2 = m2.toCharArray();
 
-
-        int begin = 0;
-        int len = 0;
+        int begin = 0; // begin index of add position
+        int len = 0; // valid result lengh
         for (int j = array2.length - 1; j >= 0; j--) {
             int b = char2Int(array2[j]);
             len = singleDigitMultiplyMultiDigits(retArray, array1, begin, b);
@@ -27,7 +26,7 @@ public class MultiplyProc {
             int a = char2Int(array1[i]);
             int ret = a * b + advance;
             if (retArray[begin] != '\u0000') {
-                ret += char2Int(retArray[begin]);
+                ret += char2Int(retArray[begin]); // convert char to int, it is very important
             }
 
             int remainder = ret % 10;
