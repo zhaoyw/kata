@@ -9,31 +9,35 @@ public class MultiplyProc {
         char[] array1 = m1.toCharArray();
         char[] array2 = m2.toCharArray();
 
-        int beginOfAddPos = 0;
+
+        int begin = 0;
         int len = 0;
-        for (int i = array1.length - 1; i >= 0; i--) {
-            int a = char2Int(array1[i]);
-            int b = char2Int(array2[0]);
-            len = mulAndPutInArray(retArray, b, a, beginOfAddPos);
-            beginOfAddPos++;
+        for (int j = array2.length - 1; j >= 0; j--) {
+            int b = char2Int(array2[j]);
+            len = singleDigitMultiplyMultiDigits(retArray, array1, begin, b);
+            begin++;
         }
+
         return valueOf(retArray, len);
     }
 
-    private int mulAndPutInArray(char[] retArray, int b, int a, int beginOfAddPos) {
-        int ret = a * b;
-        if (retArray[beginOfAddPos] != '\u0000') {
-            ret += char2Int(retArray[beginOfAddPos]);
+    private int singleDigitMultiplyMultiDigits(char[] retArray, char[] array1, int begin, int b) {
+        int advance = 0;
+        for (int i = array1.length - 1; i >= 0; i--) {
+            int a = char2Int(array1[i]);
+            int ret = a * b + advance;
+            if (retArray[begin] != '\u0000') {
+                ret += char2Int(retArray[begin]);
+            }
+
+            int remainder = ret % 10;
+            retArray[begin++] = Character.forDigit(remainder, 10);
+            advance = ret / 10;
         }
-        int advance = ret / 10;
-        int remainder = ret % 10;
-
-        retArray[beginOfAddPos++] = Character.forDigit(remainder, 10);
-
         if (advance != 0) {
-            retArray[beginOfAddPos++] = Character.forDigit(advance, 10);
+            retArray[begin++] = Character.forDigit(advance, 10);
         }
-        return beginOfAddPos;
+        return begin;
     }
 
     private String valueOf(char[] retArray, int len) {
